@@ -144,3 +144,41 @@ body {
 .footer p {
     margin: 10px 0 0;
 }
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+
+.profile-icon, .settings-icon {
+    display: inline-block;
+    margin-left: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-img, .settings-img {
+    width: 40px; /* Tamaño ajustado para ambas imágenes */
+    height: 40px; /* Mantén el mismo tamaño para ambas */
+    border-radius: 50%; /* Hace que ambas imágenes sean redondas */
+    object-fit: cover; /* Ajusta la imagen sin distorsión */
+}

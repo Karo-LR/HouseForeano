@@ -9,10 +9,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ubicacion_lat = $_POST['ubicacion_lat'];
     $ubicacion_lng = $_POST['ubicacion_lng'];
 
-    $stmt = $pdo->prepare("INSERT INTO departamentos (usuario_id, direccion, descripcion, precio, ubicacion_lat, ubicacion_lng) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$usuario_id, $direccion, $descripcion, $precio, $ubicacion_lat, $ubicacion_lng]);
+    // Preparar la consulta usando mysqli
+    $stmt = $conn->prepare("INSERT INTO departamentos (usuario_id, direccion, descripcion, precio, ubicacion_lat, ubicacion_lng) VALUES (?, ?, ?, ?, ?, ?)");
+    
+    // Enlazar los parámetros
+    $stmt->bind_param("issdds", $usuario_id, $direccion, $descripcion, $precio, $ubicacion_lat, $ubicacion_lng);
+    
+    // Ejecutar la consulta y verificar el resultado
+    if ($stmt->execute()) {
+        echo json_encode(['status' => 'success', 'message' => 'Departamento agregado con éxito']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Error al agregar departamento']);
+    }
 
-    echo json_encode(['status' => 'success', 'message' => 'Departamento agregado con éxito']);
+    // Cerrar la declaración
+    $stmt->close();
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
 }
