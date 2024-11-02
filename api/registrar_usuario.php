@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $confirm_password = $_POST['confirm_password'];
     $tipo_usuario = $_POST['tipo_usuario'];
 
-<<<<<<< HEAD
     // Verificación de que las contraseñas coincidan
     if ($password !== $confirm_password) {
         echo json_encode(['status' => 'error', 'message' => 'Las contraseñas no coinciden. Por favor, inténtalo de nuevo.']);
@@ -19,9 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Encriptar la contraseña
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-=======
     // Preparar la inserción del nuevo usuario
->>>>>>> 20347ead5e4240e14278697246a894381b78206c
     $stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, password, tipo_usuario) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $nombre, $email, $hashed_password, $tipo_usuario);
 
