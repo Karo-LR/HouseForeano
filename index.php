@@ -44,8 +44,9 @@ session_start();
 
     <!-- Contenido principal -->
     <main class="main-content">
-        <h1>The best way to xyz on abc with your friends!</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <h1><strong>Bienvenido a HouseForaneo</strong></h1>
+    <p><em>Encuentra el hogar perfecto mientras estudias lejos de casa.</em></p>
+    
 
         <!-- Tarjetas de propiedades -->
         <section class="listings">

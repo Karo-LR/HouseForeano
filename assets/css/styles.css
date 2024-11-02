@@ -4,6 +4,7 @@ body {
     background-color: #f5f5f5;
     margin: 0;
     padding: 0;
+    color: #333;
 }
 
 /* Encabezado */
@@ -29,6 +30,7 @@ body {
     border: none;
     outline: none;
     font-size: 1em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-signup,
@@ -40,6 +42,7 @@ body {
     text-decoration: none;
     margin-left: 10px;
     font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 .btn-signup:hover,
@@ -55,15 +58,23 @@ body {
 
 .main-content h1 {
     font-size: 2.5em;
-    margin-bottom: 10px;
     color: #333;
+    margin-bottom: 10px;
 }
 
 .main-content p {
     font-size: 1.2em;
     color: #777;
+    margin: 0 auto 20px;
     max-width: 600px;
-    margin: 0 auto 40px;
+}
+
+.intro-text p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 /* Tarjetas de propiedades */
@@ -72,6 +83,7 @@ body {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    padding: 20px;
 }
 
 .card {
@@ -80,6 +92,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 250px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card img {
@@ -100,6 +118,26 @@ body {
 
 .card-info p {
     color: #555;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+/* Botón de ver más en la tarjeta */
+.btn-details {
+    display: block;
+    background-color: #ff5a5f;
+    color: #fff;
+    padding: 8px 10px;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-details:hover {
+    background-color: #ff7875;
 }
 
 /* Botón de mostrar más */
@@ -116,6 +154,7 @@ body {
     border-radius: 5px;
     font-size: 1em;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .more-listings button:hover {
@@ -135,30 +174,35 @@ body {
     color: #fff;
     text-decoration: none;
     margin: 0 10px;
+    transition: color 0.3s;
 }
 
 .footer-links a:hover {
-    text-decoration: underline;
+    color: #ff5a5f;
 }
 
 .footer p {
     margin: 10px 0 0;
 }
 
+/* Menú desplegable de perfil y ajustes */
 .dropdown-menu {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 10px;
+    border-radius: 5px;
     z-index: 1000;
+    width: 200px;
 }
 
 .dropdown-menu a {
     display: block;
-    padding: 8px 12px;
+    padding: 10px 15px;
     text-decoration: none;
-    color: black;
+    color: #333;
+    transition: background-color 0.3s;
 }
 
 .dropdown-menu a:hover {
@@ -169,6 +213,7 @@ body {
     display: block;
 }
 
+/* Iconos de perfil y ajustes */
 .profile-icon, .settings-icon {
     display: inline-block;
     margin-left: 15px;
@@ -177,8 +222,33 @@ body {
 }
 
 .profile-img, .settings-img {
-    width: 40px; /* Tamaño ajustado para ambas imágenes */
-    height: 40px; /* Mantén el mismo tamaño para ambas */
-    border-radius: 50%; /* Hace que ambas imágenes sean redondas */
-    object-fit: cover; /* Ajusta la imagen sin distorsión */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Modo oscuro */
+.dark-mode {
+    background-color: #222;
+    color: #ddd;
+}
+
+.dark-mode .header, .dark-mode .footer {
+    background-color: #111;
+}
+
+.dark-mode .search-bar {
+    background-color: #333;
+    color: #ddd;
+}
+
+.dark-mode .card {
+    background-color: #333;
+    color: #ddd;
+}
+
+.dark-mode .dropdown-menu {
+    background-color: #444;
+    color: #ddd;
 }
