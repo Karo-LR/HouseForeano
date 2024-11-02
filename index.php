@@ -16,11 +16,14 @@ session_start();
         <div class="logo">HouseForaneo</div>
         <input type="text" class="search-bar" placeholder="Pon tu casa o departamento en HouseForaneo">
         
-        <?php if (isset($_SESSION['user_id'])): ?>
+        <?php if (isset($_SESSION['usuario'])): ?>
             <!-- Opciones cuando el usuario está autenticado -->
+            <div class="user-info">
+                <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?>!</p>
+            </div>
             <div class="profile-icon">
-            <img src="assets/img/perfil.png" alt="Perfil" class="profile-img" onclick="toggleProfileMenu()">
-            <div id="profileMenu" class="dropdown-menu">
+                <img src="assets/img/perfil.png" alt="Perfil" class="profile-img" onclick="toggleProfileMenu()">
+                <div id="profileMenu" class="dropdown-menu">
                     <a href="templates/ver_perfil.php">Ver Perfil</a>
                     <a href="api/logout.php">Cerrar Sesión</a>
                 </div>
@@ -44,10 +47,9 @@ session_start();
 
     <!-- Contenido principal -->
     <main class="main-content">
-    <h1><strong>Bienvenido a HouseForaneo</strong></h1>
-    <p><em>Encuentra el hogar perfecto mientras estudias lejos de casa.</em></p>
-    
-
+        <h1><strong>Bienvenido a HouseForaneo</strong></h1>
+        <p><em>Encuentra el hogar perfecto mientras estudias lejos de casa.</em></p>
+        
         <!-- Tarjetas de propiedades -->
         <section class="listings">
             <!-- Ejemplo de tarjeta de propiedad -->
