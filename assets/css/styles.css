@@ -283,3 +283,18 @@ body {
 .btn-finalize:hover {
     background-color: #ff7875;
 }
+
+/* Modo oscuro */
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .config-menu {
+    background-color: #555;
+    color: #fff;
+}
+
+.dark-mode .config-menu a:hover {
+    background-color: #666;
+}
