@@ -28,15 +28,9 @@ session_start();
                     <a href="api/logout.php">Cerrar Sesión</a>
                 </div>
             </div>
-            <div class="settings-icon">
-                <img src="assets/img/ajuste.png" alt="Ajustes" class="settings-img" onclick="toggleSettingsMenu()">
-                <div id="settingsMenu" class="dropdown-menu">
-                    <a href="templates/actualizar_perfil.php">Actualizar Perfil</a>
-                    <a href="#" onclick="toggleDarkMode()">Modo Oscuro</a>
-                    <a href="templates/informacion.php">Acceder a tu Información</a>
-                    <a href="templates/metodo_pago.php">Agregar/Actualizar Método de Pago</a>
-                    <a href="templates/cambiar_contrasena.php">Cambiar Contraseña</a>
-                </div>
+            <div class="user-actions">
+                <a href="templates/mis_departamentos.php" class="btn">Mis Departamentos</a>
+                <a href="templates/subir_departamento.php" class="btn">Subir Departamento</a>
             </div>
         <?php else: ?>
             <!-- Opciones cuando el usuario no ha iniciado sesión -->
@@ -44,6 +38,7 @@ session_start();
             <a href="templates/login.php" class="btn-login">Iniciar Sesión</a>
         <?php endif; ?>
     </header>
+    
 
     <!-- Contenido principal -->
     <main class="main-content">
@@ -87,24 +82,12 @@ session_start();
             document.getElementById("profileMenu").classList.toggle("show");
         }
 
-        // Función para mostrar/ocultar el menú de ajustes
-        function toggleSettingsMenu() {
-            document.getElementById("settingsMenu").classList.toggle("show");
-        }
-
-        // Cerrar el menú si se hace clic fuera de él
+        // Función para cerrar los menús si se hace clic fuera de ellos
         window.onclick = function(event) {
-            if (!event.target.matches('.profile-icon img')) {
+            if (!event.target.matches('.profile-img')) {
                 var profileMenu = document.getElementById("profileMenu");
                 if (profileMenu && profileMenu.classList.contains('show')) {
                     profileMenu.classList.remove('show');
-                }
-            }
-
-            if (!event.target.matches('.settings-icon img')) {
-                var settingsMenu = document.getElementById("settingsMenu");
-                if (settingsMenu && settingsMenu.classList.contains('show')) {
-                    settingsMenu.classList.remove('show');
                 }
             }
         }
