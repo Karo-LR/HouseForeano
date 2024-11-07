@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Verificar la contraseña
         if (password_verify($password, $user['password'])) {
             // Establecer variables de sesión para el usuario
-            $_SESSION['usuario'] = $user['nombre']; // Usar 'usuario' en lugar de 'nombre' para que coincida con el index.php
-            $_SESSION['user_id'] = $user['id']; // Opcional, si deseas usar el ID más adelante
+            $_SESSION['usuario'] = $user['nombre']; // Opcional: guardar el nombre del usuario
+            $_SESSION['usuario_id'] = $user['id'];  // Usar 'usuario_id' para que coincida con agregar_departamento.php
 
-            // Redirigir a la página principal
+            // Redirigir a la página principal o dashboard
             header("Location: ../index.php");
             exit();
         } else {
