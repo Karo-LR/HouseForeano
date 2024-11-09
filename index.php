@@ -9,22 +9,29 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HouseForaneo - Inicio</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
     <!-- Encabezado -->
     <header class="header">
+    <a href="/" class="home-icon">
+        <i class="fas fa-home"></i> <!-- Ícono de la casita -->
+    </a>
         <div class="logo">HouseForaneo</div>
         <input type="text" class="search-bar" placeholder="Pon tu casa o departamento en HouseForaneo">
         
         <?php if (isset($_SESSION['usuario'])): ?>
             <!-- Opciones cuando el usuario está autenticado -->
             <div class="user-info">
-                <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?>!</p>
+                <p> <?php echo htmlspecialchars($_SESSION['usuario']); ?></p>
             </div>
             <div class="profile-icon">
                 <img src="assets/img/perfil.png" alt="Perfil" class="profile-img" onclick="toggleProfileMenu()">
                 <div id="profileMenu" class="dropdown-menu">
                     <a href="templates/ver_perfil.php">Ver Perfil</a>
+                    <a href="templates/ver_perfil.php">Configuración</a>
                     <a href="api/logout.php">Cerrar Sesión</a>
                 </div>
             </div>
@@ -71,6 +78,21 @@ session_start();
             <a href="#">Términos y Condiciones</a> |
             <a href="#">Política de Privacidad</a> |
             <a href="#">Nuestro Blog</a>
+
+        <div class="social-icons">
+        <a href="https://www.facebook.com" target="_blank">
+            <img src="assets/img/facebook-icon.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com" target="_blank">
+            <img src="assets/img/instagram-icon.png" alt="Instagram">
+        </a>
+        <a href="https://www.tiktok.com" target="_blank">
+            <img src="assets/img/tiktok-icon.png" alt="TikTok">
+        </a>
+        <a href="https://www.whatsapp.com" target="_blank">
+            <img src="assets/img/whatsapp-icon.png" alt="WhatsApp">
+        </a>
+         </div>            
         </div>
         <p>© 2024 HouseForaneo - Chiapas, Tuxtla Gutiérrez</p>
     </footer>
