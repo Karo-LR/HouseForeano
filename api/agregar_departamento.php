@@ -4,84 +4,57 @@ require_once '../config/db.php';
 
 // Verifica si el usuario está autenticado
 if (!isset($_SESSION['usuario_id'])) {
-    echo "Error: Usuario no autenticado.";
+    header("Location: ../templates/login.php");
     exit();
 }
 
 $id_usuario = $_SESSION['usuario_id'];
+$titulo = $_POST['titulo'];
+$descripcion = $_POST['descripcion'];
+$ciudad = $_POST['ciudad'];
+$estado = $_POST['estado'];
+$direccion = $_POST['direccion'];
+$precio = $_POST['precio'];
+$tipo_propiedad = $_POST['tipo_propiedad'];
 
-// Verifica que todas las variables necesarias estén en $_POST
-if (isset($_POST['titulo'], $_POST['descripcion'], $_POST['ciudad'], $_POST['estado'], $_POST['direccion'], $_POST['precio'], $_POST['tipo_propiedad'])) {
-    $titulo = $_POST['titulo'];
-    $descripcion = $_POST['descripcion'];
-    $ciudad = $_POST['ciudad'];
-    $estado = $_POST['estado'];
-    $direccion = $_POST['direccion'];
-    $precio = (float) $_POST['precio'];
-    $tipo_propiedad = $_POST['tipo_propiedad'];
+// Insertar datos del departamento en la base de datos
+$query = "INSERT INTO departamentos (id_usuario, titulo, descripcion, ciudad, estado, direccion, precio, tipo_propiedad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("isssssis", $id_usuario, $titulo, $descripcion, $ciudad, $estado, $direccion, $precio, $tipo_propiedad);
+$stmt->execute();
 
-    // Preparar la consulta para insertar un nuevo departamento
-    $stmt = $conn->prepare("INSERT INTO departamentos (titulo, descripcion, ciudad, estado, direccion, precio, tipo_propiedad, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    
-    if ($stmt === false) {
-        echo "Error en la preparación de la consulta: " . $conn->error;
-        exit();
+// Obtener el ID del departamento insertado
+$departamento_id = $stmt->insert_id;
+
+// Verificar si se subieron imágenes
+if (isset($_FILES['imagenes']) && $_FILES['imagenes']['error'][0] === UPLOAD_ERR_OK) {
+    // Directorio donde se guardarán las imágenes
+    $directorio = "../uploads/";
+    if (!is_dir($directorio)) {
+        mkdir($directorio, 0777, true);
     }
 
-    $stmt->bind_param("sssssdsi", $titulo, $descripcion, $ciudad, $estado, $direccion, $precio, $tipo_propiedad, $id_usuario);
+    // Procesar cada imagen
+    foreach ($_FILES['imagenes']['tmp_name'] as $key => $tmp_name) {
+        $nombre_imagen = $_FILES['imagenes']['name'][$key];
+        $ruta_imagen = $directorio . uniqid() . "_" . basename($nombre_imagen);
 
-    if ($stmt->execute()) {
-        $departamento_id = $stmt->insert_id;  // Obtener el ID del departamento recién agregado
-
-        // Procesar las imágenes
-        if (!empty($_FILES['imagenes']['name'][0])) {
-            $imagenes = $_FILES['imagenes'];
-            $total_imagenes = count($imagenes['name']);
-
-            // Directorio donde se guardarán las imágenes
-            $upload_dir = "../assets/img/";
-
-            // Verifica si el directorio existe, si no, lo crea
-            if (!is_dir($upload_dir)) {
-                mkdir($upload_dir, 0777, true);
-            }
-
-            // Procesa cada imagen
-            for ($i = 0; $i < $total_imagenes; $i++) {
-                $imagen_nombre = basename($imagenes['name'][$i]);
-                $imagen_ruta = $upload_dir . $imagen_nombre;
-                $imagen_tipo = pathinfo($imagen_ruta, PATHINFO_EXTENSION);
-
-                // Validar tipo de archivo (opcional, puedes ajustar esto según tus necesidades)
-                $formatos_permitidos = ['jpg', 'jpeg', 'png', 'gif'];
-                if (in_array(strtolower($imagen_tipo), $formatos_permitidos)) {
-                    // Mueve la imagen al directorio de destino
-                    if (move_uploaded_file($imagenes['tmp_name'][$i], $imagen_ruta)) {
-                        // Guarda la ruta de la imagen en la base de datos
-                        $stmt_img = $conn->prepare("INSERT INTO imagenes_departamento (departamento_id, ruta_imagen) VALUES (?, ?)");
-                        if ($stmt_img) {
-                            $stmt_img->bind_param("is", $departamento_id, $imagen_nombre);
-                            $stmt_img->execute();
-                            $stmt_img->close();
-                        }
-                    } else {
-                        echo "Error al subir la imagen: " . $imagen_nombre;
-                    }
-                } else {
-                    echo "Formato de imagen no permitido: " . $imagen_nombre;
-                }
-            }
+        // Mover la imagen al directorio de destino
+        if (move_uploaded_file($tmp_name, $ruta_imagen)) {
+            // Guardar la ruta de la imagen en la tabla `imagenes_departamento`
+            $query_imagen = "INSERT INTO imagenes_departamento (departamento_id, ruta_imagen) VALUES (?, ?)";
+            $stmt_imagen = $conn->prepare($query_imagen);
+            $stmt_imagen->bind_param("is", $departamento_id, $ruta_imagen);
+            $stmt_imagen->execute();
         }
-
-        echo "Departamento agregado exitosamente.";
-    } else {
-        echo "Error al agregar el departamento: " . $stmt->error;
     }
-
-    $stmt->close();
-} else {
-    echo "Error: Faltan datos necesarios para agregar el departamento.";
 }
 
+// Cerrar conexiones
+$stmt->close();
 $conn->close();
+
+// Redirigir al usuario a la página de "Mis Departamentos"
+header("Location: ../templates/mis_departamentos.php");
+exit();
 ?>
