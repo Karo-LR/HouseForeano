@@ -30,8 +30,7 @@ session_start();
             <div class="profile-icon">
                 <img src="assets/img/perfil.png" alt="Perfil" class="profile-img" onclick="toggleProfileMenu()">
                 <div id="profileMenu" class="dropdown-menu">
-                    <a href="templates/ver_perfil.php">Ver Perfil</a>
-                    <a href="templates/ver_perfil.php">Configuración</a>
+                    <a href="templates/gestionar_cuenta.php">Gestionar Cuenta</a>
                     <a href="api/logout.php">Cerrar Sesión</a>
                 </div>
             </div>
@@ -73,12 +72,6 @@ session_start();
     <!-- Pie de página -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="#">Quiénes somos</a> |
-            <a href="#">Descubre</a> |
-            <a href="#">Términos y Condiciones</a> |
-            <a href="#">Política de Privacidad</a> |
-            <a href="#">Nuestro Blog</a>
-
         <div class="social-icons">
         <a href="https://www.facebook.com" target="_blank">
             <img src="assets/img/facebook-icon.png" alt="Facebook">
@@ -92,7 +85,13 @@ session_start();
         <a href="https://www.whatsapp.com" target="_blank">
             <img src="assets/img/whatsapp-icon.png" alt="WhatsApp">
         </a>
-         </div>            
+         </div> 
+            <a href="#">Quiénes somos</a> |
+            <a href="#">Descubre</a> |
+            <a href="#">Términos y Condiciones</a> |
+            <a href="#">Política de Privacidad</a> |
+            <a href="#">Nuestro Blog</a>
+           
         </div>
         <p>© 2024 HouseForaneo - Chiapas, Tuxtla Gutiérrez</p>
     </footer>
