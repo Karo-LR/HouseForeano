@@ -161,25 +161,23 @@ transition: background-color 0.3s;
     background-color: #4fb175;
 }
 
-/* Botón de mostrar más */
-.more-listings {
-    text-align: center;
-    margin: 30px 0;
-}
 
-.more-listings button {
-    background-color: #ff5a5f;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.more-listings button:hover {
-    background-color: #ff7875;
+/* Botón de "mostrar más" */ 
+.more-listings { 
+    text-align: center; /* Centra el botón */ 
+    margin-top: 20px; /* Espacio superior al contenedor */ 
+} 
+.more-listings button { 
+    background-color: #ff5a5f; 
+    color: #fff; 
+    padding: 5px 10px; /* Reduce el padding para hacerlo más pequeño */ 
+    font-size: 0.8em; /* Ajusta el tamaño de la fuente para hacer el botón más pequeño */ 
+    border: none; 
+    border-radius: 5px; cursor: pointer; 
+    transition: background-color 0.3s; 
+} 
+.more-listings button:hover { 
+    background-color: #ff7875; 
 }
 
 /* Pie de página */
@@ -350,13 +348,12 @@ transition: background-color 0.3s;
 }
 
 .more-listings button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #C1E1A7;
-    color: rgb(255, 255, 255);
-    border: none;
+    background-color: #efd5b2;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1em;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 /* Pie de página */
@@ -629,3 +626,6 @@ button:hover {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
+
+

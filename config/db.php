@@ -12,14 +12,23 @@ if ($conn->connect_error) {
 
 $conn->set_charset("utf8mb4");
 
-
-// Función para ejecutar consultas preparadas
 function executeQuery($query, $params = []) {
     global $conn;
     $stmt = $conn->prepare($query);
-    if ($params) {
-        $stmt->bind_param(...$params);
+
+    if ($stmt === false) {
+        die("Error in query preparation: " . $conn->error);
     }
+
+    if ($params) {
+        $types = '';
+        foreach ($params as $param) {
+            $types .= is_int($param) ? 'i' : (is_double($param) ? 'd' : 's');
+        }
+
+        $stmt->bind_param($types, ...$params);
+    }
+
     $stmt->execute();
     return $stmt;
 }
