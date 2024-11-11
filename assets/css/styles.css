@@ -204,6 +204,21 @@ transition: background-color 0.3s;
     margin: 10px 0 0;
 }
 
+.footer-links a img {
+    width: 30px; /* Ajusta el tamaño según tu preferencia */
+    height: 30px; /* Asegúrate de que sea cuadrado */
+    margin: 0 5px; /* Agrega espacio entre las imágenes */
+    transition: transform 0.3s;
+}
+
+.footer-links a img:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el cursor */
+}
+
+
+
+
+
 /* Menú desplegable de perfil y ajustes */
 .dropdown-menu {
     display: none;

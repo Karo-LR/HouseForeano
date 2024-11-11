@@ -72,18 +72,17 @@ session_start();
     <!-- Pie de página -->
     <footer class="footer">
         <div class="footer-links">
-        <div class="social-icons">
         <a href="https://www.facebook.com" target="_blank">
-            <img src="assets/img/facebook-icon.png" alt="Facebook">
+            <img src="assets/img/facebook.png" alt="Facebook">
         </a>
         <a href="https://www.instagram.com" target="_blank">
-            <img src="assets/img/instagram-icon.png" alt="Instagram">
+            <img src="assets/img/instagram.png" alt="Instagram">
         </a>
         <a href="https://www.tiktok.com" target="_blank">
-            <img src="assets/img/tiktok-icon.png" alt="TikTok">
+            <img src="assets/img/tiktok.png" alt="TikTok">
         </a>
         <a href="https://www.whatsapp.com" target="_blank">
-            <img src="assets/img/whatsapp-icon.png" alt="WhatsApp">
+            <img src="assets/img/whatsapp.png" alt="WhatsApp">
         </a>
          </div> 
             <a href="#">Quiénes somos</a> |
