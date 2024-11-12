@@ -1,5 +1,17 @@
 <?php
 session_start();
+include_once 'config/db.php';
+
+// Consulta SQL para seleccionar solo propiedades de tipo 'casa'
+$sql = "SELECT d.*, i.ruta_imagen 
+        FROM departamentos d 
+        LEFT JOIN imagenes_departamento i ON d.id_departamento = i.departamento_id 
+        WHERE d.tipo_propiedad = 'casa' 
+        GROUP BY d.id_departamento 
+        ORDER BY d.fecha_publicacion DESC 
+        LIMIT 10";
+
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -11,21 +23,24 @@ session_start();
     <link rel="stylesheet" href="assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
 </head>
 <body>
     <!-- Encabezado -->
     <header class="header">
-    <a href="/" class="home-icon">
-        <i class="fas fa-home"></i> <!-- Ícono de la casita -->
-    </a>
+        <a href="/" class="home-icon">
+            <i class="fas fa-home"></i>
+        </a>
         <div class="logo">HouseForaneo</div>
-        <input type="text" class="search-bar" placeholder="Pon tu casa o departamento en HouseForaneo">
-        
+
+        <!-- Formulario de búsqueda -->
+        <form method="GET" action="templates/busqueda.php" style="display:inline;">
+            <input type="text" name="search" class="search-bar" placeholder="Pon tu casa en HouseForaneo">
+            <button type="submit" class="search-button">Buscar</button>
+        </form>
+
         <?php if (isset($_SESSION['usuario'])): ?>
-            <!-- Opciones cuando el usuario está autenticado -->
             <div class="user-info">
-                <p> <?php echo htmlspecialchars($_SESSION['usuario']); ?></p>
+                <p><?php echo htmlspecialchars($_SESSION['usuario']); ?></p>
             </div>
             <div class="profile-icon">
                 <img src="assets/img/perfil.png" alt="Perfil" class="profile-img" onclick="toggleProfileMenu()">
@@ -39,13 +54,11 @@ session_start();
                 <a href="templates/subir_departamento.php" class="btn">Subir Departamento</a>
             </div>
         <?php else: ?>
-            <!-- Opciones cuando el usuario no ha iniciado sesión -->
             <a href="templates/registro.php" class="btn-signup">Registrarse</a>
             <a href="templates/login.php" class="btn-login">Iniciar Sesión</a>
         <?php endif; ?>
     </header>
     
-
     <!-- Contenido principal -->
     <main class="main-content">
         <h1><strong>Bienvenido a HouseForaneo</strong></h1>
@@ -53,56 +66,49 @@ session_start();
         
         <!-- Tarjetas de propiedades -->
         <section class="listings">
-            <!-- Ejemplo de tarjeta de propiedad -->
-            <div class="card">
-                <img src="assets/img/cuarto1.png" alt="Imagen de la propiedad">
-                <div class="card-info">
-                    <h3>Cuarto en alquiler</h3>
-                    <p>Ciudad de México, 5 estrellas, $5,000 MXN/mes</p>
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <div class="card">
+                    <img src="<?php echo $row['ruta_imagen'] ? 'assets/img/' . $row['ruta_imagen'] : 'assets/img/default.jpg'; ?>" alt="Imagen de la propiedad">
+                    <div class="card-info">
+                        <h3><?php echo htmlspecialchars($row['titulo']); ?></h3>
+                        <p><?php echo htmlspecialchars($row['ciudad']) . ', ' . htmlspecialchars($row['estado']); ?></p>
+                        <p><?php echo "$" . number_format($row['precio'], 2) . " MXN/mes"; ?></p>
+                    </div>
                 </div>
-            </div>
-            <!-- Más tarjetas de propiedades según sea necesario -->
+            <?php } ?>
         </section>
-
-        <div class="more-listings">
-            <button>Mostrar más</button>
-        </div>
     </main>
 
     <!-- Pie de página -->
     <footer class="footer">
         <div class="footer-links">
-        <a href="https://www.facebook.com" target="_blank">
-            <img src="assets/img/facebook.png" alt="Facebook">
-        </a>
-        <a href="https://www.instagram.com" target="_blank">
-            <img src="assets/img/instagram.png" alt="Instagram">
-        </a>
-        <a href="https://www.tiktok.com" target="_blank">
-            <img src="assets/img/tiktok.png" alt="TikTok">
-        </a>
-        <a href="https://www.whatsapp.com" target="_blank">
-            <img src="assets/img/whatsapp.png" alt="WhatsApp">
-        </a>
-         </div> 
-            <a href="#">Quiénes somos</a> |
-            <a href="#">Descubre</a> |
-            <a href="#">Términos y Condiciones</a> |
-            <a href="#">Política de Privacidad</a> |
-            <a href="#">Nuestro Blog</a>
-           
-        </div>
+            <a href="https://www.facebook.com" target="_blank">
+                <img src="assets/img/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
+                <img src="assets/img/instagram.png" alt="Instagram">
+            </a>
+            <a href="https://www.tiktok.com" target="_blank">
+                <img src="assets/img/tiktok.png" alt="TikTok">
+            </a>
+            <a href="https://www.whatsapp.com" target="_blank">
+                <img src="assets/img/whatsapp.png" alt="WhatsApp">
+            </a>
+        </div> 
+        <a href="#">Quiénes somos</a> |
+        <a href="#">Descubre</a> |
+        <a href="#">Términos y Condiciones</a> |
+        <a href="#">Política de Privacidad</a> |
+        <a href="#">Nuestro Blog</a>
         <p>© 2024 HouseForaneo - Chiapas, Tuxtla Gutiérrez</p>
     </footer>
 
     <script src="assets/js/scripts.js"></script>
     <script>
-        // Función para mostrar/ocultar el menú de perfil
         function toggleProfileMenu() {
             document.getElementById("profileMenu").classList.toggle("show");
         }
 
-        // Función para cerrar los menús si se hace clic fuera de ellos
         window.onclick = function(event) {
             if (!event.target.matches('.profile-img')) {
                 var profileMenu = document.getElementById("profileMenu");
