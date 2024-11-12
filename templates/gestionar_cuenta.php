@@ -93,7 +93,7 @@ $result = executeQuery("SELECT nombre FROM usuarios WHERE id = ?", [$userId]);
         <div class="card">
             <h3>Opciones de personalización</h3>
             <p>Personaliza tu cuenta para que se adapte a lo que necesitas.</p>
-            <a href="personalizacion.php">Gestionar las preferencias</a>
+            <a href="preferencias_usuario.php">Gestionar las preferencias</a>
         </div>
 
         <div class="card">

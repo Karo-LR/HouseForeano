@@ -34,3 +34,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
 }
+
+
+if ($result) {
+    // Obtiene el ID del nuevo usuario
+    $user_id = $conn->insert_id;
+
+    // Inserta las preferencias por defecto en `preferencias_usuario`
+    $default_moneda = 'MXN';  // Ajusta el valor por defecto
+    $default_idioma = 'español';  // Ajusta el valor por defecto
+    $query_prefs = "INSERT INTO preferencias_usuario (user_id, moneda, idioma) VALUES (?, ?, ?)";
+    executeQuery($query_prefs, [$user_id, $default_moneda, $default_idioma]);
+
+    echo "Usuario registrado y preferencias creadas con éxito.";
+} else {
+    echo "Error al registrar el usuario.";
+}
