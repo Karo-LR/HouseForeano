@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_id'])) {
 $user_id = $_SESSION['usuario_id'];
 
 // Consulta la moneda e idioma actual del usuario
-$query = "SELECT moneda, idioma FROM preferencias_usuario WHERE user_id = ?";
+$query = "SELECT moneda, idioma FROM preferencias_usuario WHERE id_usuario = ?";
 $stmt = $conn->prepare($query);
 
 if ($stmt === false) {

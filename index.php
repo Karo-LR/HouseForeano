@@ -64,20 +64,24 @@ $result = $conn->query($sql);
         <h1><strong>Bienvenido a HouseForaneo</strong></h1>
         <p><em>Encuentra el hogar perfecto mientras estudias lejos de casa.</em></p>
         
-        <!-- Tarjetas de propiedades -->
-        <section class="listings">
-            <?php while ($row = $result->fetch_assoc()) { ?>
-                <div class="card">
-                    <img src="<?php echo $row['ruta_imagen'] ? 'assets/img/' . $row['ruta_imagen'] : 'assets/img/default.jpg'; ?>" alt="Imagen de la propiedad">
-                    <div class="card-info">
-                        <h3><?php echo htmlspecialchars($row['titulo']); ?></h3>
-                        <p><?php echo htmlspecialchars($row['ciudad']) . ', ' . htmlspecialchars($row['estado']); ?></p>
-                        <p><?php echo "$" . number_format($row['precio'], 2) . " MXN/mes"; ?></p>
-                    </div>
+<!-- Tarjetas de propiedades -->
+<section class="listings">
+    <?php while ($row = $result->fetch_assoc()) { ?>
+        <a href="templates/detalle_departamento.php?id=<?php echo $row['id_departamento']; ?>" class="card-link">
+            <div class="card">
+                <img src="<?php echo $row['ruta_imagen'] ? 'assets/img/' . $row['ruta_imagen'] : 'assets/img/default.jpg'; ?>" alt="Imagen de la propiedad">
+                <div class="card-info">
+                    <h3><?php echo htmlspecialchars($row['titulo']); ?></h3>
+                    <p><?php echo htmlspecialchars($row['ciudad']) . ', ' . htmlspecialchars($row['estado']); ?></p>
+                    <p><?php echo "$" . number_format($row['precio'], 2) . " MXN/mes"; ?></p>
                 </div>
-            <?php } ?>
-        </section>
-    </main>
+            </div>
+        </a>
+    <?php } ?>
+</section>
+
+
+    
 
     <!-- Pie de página -->
     <footer class="footer">

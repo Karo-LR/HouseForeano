@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['moneda'])) {
         $moneda = $_POST['moneda'];
         // Actualiza la moneda en la base de datos
-        $query = "UPDATE preferencias_usuario SET moneda = ? WHERE user_id = ?";
+        $query = "UPDATE preferencias_usuario SET moneda = ? WHERE usuario_id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("si", $moneda, $user_id);
         
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['idioma'])) {
         $idioma = $_POST['idioma'];
         // Actualiza el idioma en la base de datos
-        $query = "UPDATE preferencias_usuario SET idioma = ? WHERE user_id = ?";
+        $query = "UPDATE preferencias_usuario SET idioma = ? WHERE usuario_id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("si", $idioma, $user_id);
         
