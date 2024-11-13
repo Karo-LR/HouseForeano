@@ -111,25 +111,24 @@ body {
 
 /* Tarjetas de propiedades */
 .listings {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
     padding: 20px;
 }
 
 .card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 8px;
     overflow: hidden;
-    width: 250px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
 }
 
 .card img {
@@ -139,8 +138,17 @@ body {
 }
 
 .card-info {
-    padding: 15px;
-    text-align: left;
+    padding: 10px;
+}
+
+.card-info h3 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.card-info p {
+    margin: 5px 0;
+    color: #555;
 }
 
 .card-info h3 {
@@ -569,4 +577,82 @@ body {
     .main-content p {
         font-size: 1em;
     }
+}
+
+#chat-window {
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    width: 300px;
+    height: 400px;
+    padding: 10px;
+    position: relative;
+}
+
+#chat-messages {
+    height: 85%;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+#chat-input {
+    width: calc(100% - 60px);
+    padding: 5px;
+}
+
+#chat-window button {
+    padding: 6px 10px;
+}
+
+#chat-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    max-width: 400px;
+    background-color: #f9f9f9;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#messages {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+#messages div {
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+}
+
+#messages .sent {
+    background-color: #d1e7ff;
+    text-align: right;
+}
+
+#messages .received {
+    background-color: #ffe1e1;
+    text-align: left;
+}
+
+#chat-form {
+    display: flex;
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#chat-form button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
 }
