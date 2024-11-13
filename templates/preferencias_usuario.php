@@ -16,8 +16,7 @@ $stmt = $conn->prepare($query);
 if ($stmt === false) {
     die("Error en la preparación de la consulta: " . $conn->error);
 }
-
-$stmt->bind_param("i", $user_id);
+$stmt->bind_param("i", $usuario_id);
 $stmt->execute();
 $stmt->bind_result($moneda_actual, $idioma_actual);
 
