@@ -15,31 +15,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['moneda'])) {
         $moneda = $_POST['moneda'];
         // Actualiza la moneda en la base de datos
-        $query = "UPDATE preferencias_usuario SET moneda = ? WHERE user_id = ?";
+        $query = "UPDATE preferencias_usuario SET moneda = ? WHERE usuario_id = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("si", $moneda, $user_id);
         
-        if ($stmt->execute()) {
-            echo 'success'; // Responde con éxito si la actualización fue correcta
+        if ($stmt) {
+            $stmt->bind_param("si", $moneda, $user_id);
+            if ($stmt->execute()) {
+                echo 'success'; // Responde con éxito si la actualización fue correcta
+            } else {
+                echo 'Error al actualizar la moneda: ' . $stmt->error;
+            }
+            $stmt->close();
         } else {
-            echo 'Error al actualizar la moneda: ' . $stmt->error;
+            echo 'Error en la preparación de la consulta: ' . $conn->error;
         }
-        $stmt->close();
     }
 
     if (isset($_POST['idioma'])) {
         $idioma = $_POST['idioma'];
         // Actualiza el idioma en la base de datos
-        $query = "UPDATE preferencias_usuario SET idioma = ? WHERE user_id = ?";
+        $query = "UPDATE preferencias_usuario SET idioma = ? WHERE usuario_id = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("si", $idioma, $user_id);
         
-        if ($stmt->execute()) {
-            echo 'success'; // Responde con éxito si la actualización fue correcta
+        if ($stmt) {
+            $stmt->bind_param("si", $idioma, $user_id);
+            if ($stmt->execute()) {
+                echo 'success'; // Responde con éxito si la actualización fue correcta
+            } else {
+                echo 'Error al actualizar el idioma: ' . $stmt->error;
+            }
+            $stmt->close();
         } else {
-            echo 'Error al actualizar el idioma: ' . $stmt->error;
+            echo 'Error en la preparación de la consulta: ' . $conn->error;
         }
-        $stmt->close();
     }
 }
 ?>
