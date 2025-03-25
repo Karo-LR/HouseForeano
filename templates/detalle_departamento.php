@@ -2,12 +2,14 @@
 session_start();
 require_once '../config/db.php';
 
+// Obtener el ID del departamento
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($id <= 0) {
     echo "ID de departamento inválido.";
     exit;
 }
 
+// Consulta para obtener detalles del departamento
 $query = "SELECT * FROM departamentos WHERE id_departamento = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $id);
@@ -35,7 +37,11 @@ $departamento = $resultado->fetch_assoc();
 <div style="max-width: 800px; margin: 20px auto; padding: 20px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
     <h1 style="color: #333;"><?php echo htmlspecialchars($departamento['titulo']); ?></h1>
     <p><?php echo nl2br(htmlspecialchars($departamento['descripcion'])); ?></p>
-    <p><strong>Dirección:</strong> <a href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode($departamento['direccion']); ?>" target="_blank"><?php echo htmlspecialchars($departamento['direccion']); ?></a></p>
+    <p><strong>Dirección:</strong> 
+        <a href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode($departamento['direccion']); ?>" target="_blank">
+            <?php echo htmlspecialchars($departamento['direccion']); ?>
+        </a>
+    </p>
 
     <!-- Mapa de Google Maps utilizando iframe -->
     <div style="margin-top: 20px;">

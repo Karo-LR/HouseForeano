@@ -1,20 +1,15 @@
 <?php
-session_start();
-include_once '../config/db.php';
+require_once '../config/db.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['id_usuario'])) {
-    $mensaje = $_POST['mensaje'];
-    $departamento_id = $_POST['departamento_id'];
-    $usuario_id = $_SESSION['id_usuario'];
+$data = json_decode(file_get_contents("php://input"), true);
 
-    $sql = "INSERT INTO mensajes (usuario_id, departamento_id, mensaje) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iis", $usuario_id, $departamento_id, $mensaje);
+$id_departamento = intval($data['id_departamento']);
+$mensaje = htmlspecialchars($data['mensaje']);
+$user_type = $_SESSION['usuario_id'] == $departamento['id_usuario'] ? 'propietario' : 'interesado';
 
-    if ($stmt->execute()) {
-        echo json_encode(["success" => true]);
-    } else {
-        echo json_encode(["success" => false]);
-    }
-}
+$query = "INSERT INTO mensajes (departamento_id, mensaje, user_type, fecha_enviado) VALUES (?, ?, ?, NOW())";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("iss", $id_departamento, $mensaje, $user_type);
+$stmt->execute();
+$stmt->close();
 ?>

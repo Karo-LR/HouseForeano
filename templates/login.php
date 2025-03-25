@@ -17,6 +17,10 @@
             <input type="password" id="password" name="password" required>
 
             <button type="submit">Iniciar Sesión</button>
+            
+            <p><a href="cambiar_password.php">Cambiar Contraseña</a></p>
+            <p><a href="recuperar_password.php">Recuperar Contraseña</a></p>
+            
             <p>¿No tienes una cuenta? <a href="registro.php">Regístrate aquí</a></p>
         </form>
     </div>

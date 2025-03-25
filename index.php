@@ -104,6 +104,9 @@ if ($id_usuario) {
         </section>
     </main>
 
+
+
+    
     <!-- Pie de página -->
     <footer class="footer">
         <div class="footer-links">

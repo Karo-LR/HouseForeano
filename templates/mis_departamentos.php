@@ -163,6 +163,34 @@ $result = $stmt->get_result();
         ?>
     </div>
 
+    <div class="chat-container" id="chat-<?php echo $row['id_departamento']; ?>">
+    <h4>Chat con interesados</h4>
+    <div class="chat-messages" id="messages-<?php echo $row['id_departamento']; ?>">
+        <!-- Los mensajes se cargarán aquí -->
+    </div>
+    <textarea id="inputMessage-<?php echo $row['id_departamento']; ?>" placeholder="Escribe un mensaje..."></textarea>
+    <button onclick="sendMessage(<?php echo $row['id_departamento']; ?>)">Enviar</button>
+</div>
+<style>
+   .chat-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+}
+.chat-messages {
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+textarea {
+    width: 100%;
+    resize: none;
+}
+ 
+</style>
+
     <script src="../assets/js/carousel.js"></script>
 </body>
 </html>
