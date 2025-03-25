@@ -13,8 +13,8 @@
             <label for="email">Correo electrónico:</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="new_password">Nueva Contraseña:</label>
-            <input type="password" id="new_password" name="new_password" required>
+            <label for="password_nuevo">Nueva Contraseña:</label>
+            <input type="password" id="password_nuevo" name="password_nuevo" required>
 
             <label for="confirm_password">Confirmar Contraseña:</label>
             <input type="password" id="confirm_password" name="confirm_password" required>

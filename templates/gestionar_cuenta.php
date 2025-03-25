@@ -1,4 +1,4 @@
-<?php
+<p?php
 session_start();
 require_once '../config/db.php'; // Esto ya incluye la función executeQuery de db.php
 
@@ -86,8 +86,10 @@ $result = executeQuery("SELECT nombre FROM usuarios WHERE id = ?", [$userId]);
 
         <div class="card">
             <h3>Gestión de datos y privacidad</h3>
-            <p>Ejercita tus derechos de privacidad, controla tus datos o exporta información.</p>
-            <a href="privacidad.php">Gestionar la privacidad</a>
+            <p>Cambiar contraseña</p>
+            <p>Recuperar contraseña</p>
+            <a href="contraseñas.php">Cambia y/o Recupera tu Contraseña</a>
+
         </div>
 
         <div class="card">
@@ -102,11 +104,16 @@ $result = executeQuery("SELECT nombre FROM usuarios WHERE id = ?", [$userId]);
             <a href="metodos_pago.php">Gestionar los datos de pago</a>
         </div>
 
+
         <div class="card">
-            <h3>Preferencias de email</h3>
-            <p>Elige las notificaciones que quieres recibir y date de baja de las que no.</p>
-            <a href="notificaciones.php">Gestionar las notificaciones</a>
+            <h3>Dashboard de Administración</h3>
+            <p>*Ver todos los usuarios registrados.</p>
+            <p>*Asignar o revocar roles a los usuarios.</p>
+            <p>*Crear nuevos roles y asignar permisos a estos roles.</p>
+            <p>*Consultar un registro de auditoría para ver las acciones realizadas por los usuarios.</p>
+            <a href="panel_administracion.php">Panel de administración para los administradores.</a><br>
         </div>
+           
     </div>
 </body>
 </html>
