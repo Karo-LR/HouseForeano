@@ -39,7 +39,7 @@ if ($result) {
             text-align: left;
         }
         th {
-            background-color: #6d0000;
+            background-color: #f2f2f2;
         }
     </style>
 </head>
