@@ -49,7 +49,7 @@ if ($result) {
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
+                <th>name</th>
                 <th>Email</th>
             </tr>
         </thead>
